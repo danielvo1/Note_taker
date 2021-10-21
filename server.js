@@ -2,11 +2,15 @@
 const fs = require('fs');
 const express = require('express');
 const path = require('path');
+const dbDate = require('./db/db.json');
+
+// Variable declarations 
 const PORT = 3001; 
-const { application } = require('express');
 
 // Creating an instance of express
 var app = express();
+
+app.use(express.static('public'));
 
 // Sets up the Express app to handle data parsing 
 app.use(express.urlencoded({ extended: true }));
@@ -17,10 +21,14 @@ app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/notes.html'));
 });
 
+// GET route to get notes 
+app.get('/api/notes' , (req, res) =>  res.json(dbDate));
+
 // Get * should return the index.html file
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
+
 
 // Listens and make sure that the call is being made. 
 app.listen(PORT, () => {
