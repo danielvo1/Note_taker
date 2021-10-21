@@ -10,6 +10,7 @@ const PORT = 3001;
 // Creating an instance of express
 var app = express();
 
+// This allows us to access the public files for CSS, Images, Js Files
 app.use(express.static('public'));
 
 // Sets up the Express app to handle data parsing 
@@ -29,6 +30,8 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
+//Require routes file
+require('./routes')(app);
 
 // Listens and make sure that the call is being made. 
 app.listen(PORT, () => {
