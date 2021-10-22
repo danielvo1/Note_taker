@@ -5,7 +5,7 @@ const path = require('path');
 const dbDate = require('./db/db.json');
 
 // Variable declarations 
-const PORT = 3001; 
+const PORT = process.env.port || 3001; 
 
 // Creating an instance of express
 var app = express();
